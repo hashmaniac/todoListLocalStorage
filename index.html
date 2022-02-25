@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="style.css" rel="stylesheet">
+    <title>Todo List App</title>
+  </head>
+  <body>
+    <div class="container empty-todo">
+      <header>
+        <div class="theme-toggler">
+          <button class="themeBtn" type="button" id="button"></button>
+        </div>
+        <h1 class="header-title">Things Todo</h1>
+      </header>
+      <section>
+        <input class="search" type="text" id="search" placeholder="Search Todo List..">
+      </section>
+      <section class="todos">
+        <ul class="todo-list"></ul>
+      </section>
+      <footer>
+        <form id="addForm" class="addForm" action="index.html" method="post">
+          <input type="text" id="newTodo" placeholder="Create New Todo..">
+          <button type="submit" id="btnSubmit">&plus;</button>
+        </form>
+      </footer>
+    </div>
+  </body>
+</html>
