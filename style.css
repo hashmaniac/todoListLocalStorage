@@ -74,14 +74,39 @@ header {
   color: var(--text-color);
 }
 
-.todos {
+.search {
+  float: right;
+  border: none;
+  background-color: var(--footer-color);
+  color: white;
+  font-size: 15px;
+  padding: 7px;
+  width: 40%;
+}
+
+.search::placeholder {
+  color: rgb(255, 255, 0);
+}
+
+.todossec {
   margin: 20px 0;
   padding-right: 15px;
+  overflow-y: scroll;
+}
+
+.todos {
+  margin: 20px 0;
+  padding: 10px;
   overflow: hidden;
+  border: 1px var(--secondary-color) solid;
+  border-radius: 8px;
+  background-color: var(--task-color);
+  color: var(--text-color);
 }
 
 .todo-list {
   padding: 0px;
+  padding-bottom: 2px;
 }
 
 .empty-todo {
@@ -92,7 +117,15 @@ header {
   transition: 0s;
 }
 
-.todo-item {
+.delete {
+  color: var(--secondary-color);
+  background-color: #dc3545;
+  border-radius: 10px;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+/* .todo-item {
   list-style-type: none;
   border: 1px var(--secondary-color) solid;
   padding: 10px;
@@ -103,9 +136,9 @@ header {
   border-radius: 7px;
   background-color: var(--task-color);
   color: var(--text-color);
-}
+} */
 
-.todo-item:hover {
+.todos:hover {
   transition: 0.5s;
   cursor: pointer;
   background-color: rgb(226, 226, 0.192);
@@ -131,6 +164,7 @@ header {
 
 footer {
   min-width: 100%;
+  width: 100%;
   bottom: 0;
   left: 0;
   background-color: var(--footer-color);
@@ -192,7 +226,7 @@ footer {
   .container {
     width: 100%;
     padding: 0 20px;
-    height: 95vh;
+    height: 100vh;
     border: none;
     border-radius: 0;
   }
@@ -203,7 +237,12 @@ footer {
 
   .addForm input[type="text"] {
     margin-right: 2%;
-    width: 85%;
-    min-width: 85%;
+    width: 80%;
+    min-width: 80%;
+  }
+
+  .addForm button {
+    min-width: 5%;
+    min-height: 5%;
   }
 }
