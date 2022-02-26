@@ -15,7 +15,7 @@ form.addEventListener('submit', addItem);
 //add event listener to search
 search.addEventListener('keyup', filterItems);
 //add event listener to delete button
-delBtn.addEventListener('click', removeItem);
+todoList.addEventListener('click', removeItem);
 
 //load items function
 function loadList() {
@@ -96,6 +96,23 @@ function filterItems(e) {
     }
   });
 
+}
+
+// remove/delete todo items
+function removeItem(e) {
+  let todo = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  if(e.target.classList.contains("delete")){
+    console.log("working");
+    todo.forEach(task => {
+      if (task.task === e.target.parentNode.children[1].textContent) {
+        todo.splice(todo.indexOf(task), 1);
+      }
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(todo));
+    let li = e.target.parentElement;
+    todoList.removeChild(li);
+}
 }
 
 
