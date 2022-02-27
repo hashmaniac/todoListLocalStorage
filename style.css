@@ -6,9 +6,10 @@
   --footer-color: #1E1E1E;
   --theme-btn: url();
   --container-bg: url();
-  --complete-icon: url();
   --filter: none;
   --theme-transition: 0s;
+  --scrollbar-color: #dbdbdb;
+  --scrollbar-thumb-color: #bdbdbd;
 }
 
 * {
@@ -130,14 +131,9 @@ header {
   background-color: rgb(226, 226, 0.192);
 }
 
-/*task check button*/
-/*task check button hover*/
-
-/*
-.task-bio {
-  font-size: 18px;
+.check {
+  cursor: pointer;
 }
-*/
 
 .taskcompleted {
   transition: 0.5s;
@@ -189,6 +185,16 @@ footer {
   background-size: 80%;
   cursor: pointer;
   border-radius: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: var(--scrollbar-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 0.6rem;
 }
 
 @media screen and (max-width : 600px){
