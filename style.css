@@ -125,22 +125,8 @@ header {
   cursor: pointer;
 }
 
-/* .todo-item {
-  list-style-type: none;
-  border: 1px var(--secondary-color) solid;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-  border-radius: 7px;
-  background-color: var(--task-color);
-  color: var(--text-color);
-} */
-
 .todos:hover {
   transition: 0.5s;
-  cursor: pointer;
   background-color: rgb(226, 226, 0.192);
 }
 
@@ -157,7 +143,6 @@ header {
   transition: 0.5s;
   text-decoration: line-through;
   color: rgb(150, 150, 150);
-  opacity: 0;
   transform: scale(90deg);
 }
 
@@ -204,10 +189,6 @@ footer {
   background-size: 80%;
   cursor: pointer;
   border-radius: 20px;
-}
-
-.taskCompleted {
-  visibility: hidden;
 }
 
 @media screen and (max-width : 600px){

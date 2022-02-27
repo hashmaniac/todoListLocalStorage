@@ -16,6 +16,8 @@ form.addEventListener('submit', addItem);
 search.addEventListener('keyup', filterItems);
 //add event listener to delete button
 todoList.addEventListener('click', removeItem);
+//completeTask click event
+todoList.addEventListener('click', completeTask);
 
 //load items function
 function loadList() {
@@ -29,9 +31,17 @@ console.log(todo);
     todo.forEach(task => {
       let li = document.createElement('li');
       let text = task.task;
+      let checked;
+      if (task.completed === true) {
+        checked = "checked";
+      }
       li.className = "todos";
-      li.innerHTML = "<input type='checkbox' class='' id='' value=''><span>"+text+"</span><button style='float:right;' type='button' class='delete'>X</button>";
+      li.innerHTML = "<input type='checkbox' class='check' "+checked+"><span>"+text+"</span><button style='float:right;' type='button' class='delete'>X</button>";
 
+      //toggle taskCompleted  class
+      if (checked == "checked") {
+        li.children[1].classList.toggle("taskcompleted");
+      }
      //add li to Todo List
      todoList.insertBefore(li, todoList.children[0]);
    });
@@ -62,14 +72,14 @@ function addItem(e) {
 
     //insert TODO TO localStorage
     if(newTodo.value != ""){
-      localStorage.setItem('tasks', JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), {task: newTodo.value, completed: false}]));
+      localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), {task: newTodo.value, completed: false}]));
 
       //add Todo to ul list
       let li = document.createElement('li');
       let text = newTodo.value;
       li.className = "todos";
 
-      li.innerHTML = "<input type='checkbox' class='' id='' value=''><span>"+text+"</span><button style='float:right;' type='button' class='delete'>X</button>";
+      li.innerHTML = "<input type='checkbox' class='check'><span>"+text+"</span><button style='float:right;' type='button' class='delete'>X</button>";
 
       todoList.insertBefore(li, todoList.children[0]);
 
@@ -102,7 +112,7 @@ function filterItems(e) {
 function removeItem(e) {
   let todo = Array.from(JSON.parse(localStorage.getItem("tasks")));
   if(e.target.classList.contains("delete")){
-    console.log("working");
+    //console.log("working");
     todo.forEach(task => {
       if (task.task === e.target.parentNode.children[1].textContent) {
         todo.splice(todo.indexOf(task), 1);
@@ -112,9 +122,22 @@ function removeItem(e) {
     localStorage.setItem("tasks", JSON.stringify(todo));
     let li = e.target.parentElement;
     todoList.removeChild(li);
+  }
 }
+
+//strikethrough completed tasks
+function completeTask(e) {
+  let todo = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  if (e.target.classList.contains("check")) {
+    todo.forEach(task => {
+      if (task.task === e.target.parentNode.children[1].textContent) {
+        task.completed = !task.completed;
+      }
+    });
+    localStorage.setItem("tasks", JSON.stringify(todo));
+    e.target.parentNode.children[1].classList.toggle("taskcompleted");
+  }
 }
 
 
   //notes :
-  //cannot figure out what tripple dots before array means
