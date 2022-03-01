@@ -4,12 +4,13 @@
   --text-color: black;
   --task-color: white;
   --footer-color: #1E1E1E;
-  --theme-btn: url();
-  --container-bg: url();
+  --theme-btn: url(./assets/img/dark-mode.svg);
+  --container-bg: white;
   --filter: none;
   --theme-transition: 0s;
   --scrollbar-color: #dbdbdb;
   --scrollbar-thumb-color: #bdbdbd;
+  --container-bg-img: url(./assets/img/clip-light.svg);
 }
 
 * {
@@ -37,6 +38,7 @@ body {
   border-radius: 20px;
   background: var(--container-bg);
   transition: var(--theme-transition);
+  -webkit-transition: var(--theme-transition);
 }
 
 header {
@@ -50,23 +52,22 @@ header {
 }
 
 .themeBtn {
-  min-width: 30px;
-  min-height: 30px;
   background-color: transparent;
   border: none;
   outline: none;
   background-image: var(--theme-btn);
   background-repeat:no-repeat;
-  background-size: 80%;
+  background-size: 70%;
   background-position: center;
   padding: 20px;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 .themeBtn:hover {
   transition: 0.5s;
-  background-size: 85%;
-  transform: rotate(90deg);
+  background-size: 75%;
+  transform: rotate(30deg);
 }
 
 .header-title {
@@ -86,7 +87,7 @@ header {
 }
 
 .search::placeholder {
-  color: rgb(255, 255, 0);
+  color: #ff6000;
 }
 
 .todossec {
@@ -110,12 +111,14 @@ header {
   padding-bottom: 2px;
 }
 
-.empty-todo {
-  background-image: var(--container-bg);
+.empty-todo-list {
+  background-color: var(--primary-color);
+  background-image: var(--container-bg-img);
   background-repeat:no-repeat;
   background-size: 50%;
   background-position: center;
-  transition: 0s;
+  transition: 1s;
+  height: 40vh;
 }
 
 .delete {
@@ -128,7 +131,7 @@ header {
 
 .todos:hover {
   transition: 0.5s;
-  background-color: rgb(226, 226, 0.192);
+  background-color: #ad4619;
 }
 
 .check {
@@ -168,11 +171,11 @@ footer {
   color: white;
   background-color: transparent;
   border: none;
-  border-bottom: 1px rgb(255, 255, 0.267) solid;
+  border-bottom: 1px #ff6000 solid;
 }
 
 .addForm input[type="text"]::placeholder {
-  color: rgb(255, 255, 0.589);
+  color: #ff6000;
 }
 
 .addForm button {
@@ -180,7 +183,6 @@ footer {
   min-width: 30px;
   min-height: 30px;
   border: none;
-  background-image: var(--theme-btn);
   background-repeat:no-repeat;
   background-size: 80%;
   cursor: pointer;
@@ -195,6 +197,7 @@ footer {
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb-color);
   border-radius: 0.6rem;
+  transition: all 1s;
 }
 
 @media screen and (max-width : 600px){

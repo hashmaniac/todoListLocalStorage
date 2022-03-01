@@ -5,8 +5,6 @@ let todoList = document.getElementById('todoList');
 let form = document.getElementById('addForm');
 //delete button to be created
 let themeBtn = document.getElementById('themeBtn');
-// select container div
-const container = document.querySelector('.container');
 
 //load todo list
 window.onload = loadList;
@@ -26,38 +24,45 @@ themeBtn.addEventListener('click', themeChange);
 function loadList() {
   // load theme from localStorage
   let theme = Array.from(JSON.parse(localStorage.getItem('theme') || "[]"));
-  if (theme[0].dark === true) {
-    root.style.setProperty('--primary-color', '#1E1E1E');
-    root.style.setProperty('--secondary-color', '#3B3B3B');
-    root.style.setProperty('--text-color', '#EAEAEA');
-    root.style.setProperty('--task-color', '#3B3B3B');
-    root.style.setProperty('--footer-color', '#1E1E1E');
-    root.style.setProperty('--theme-btn', '');
-    root.style.setProperty('--container-bg', 'black');
-    root.style.setProperty('--filter', 'invert()');
-    root.style.setProperty('--theme-transition', '0s');
-    root.style.setProperty('--scrollbar-color', '#1E1E1E');
-    root.style.setProperty('--scrollbar-thumb-color', '#3B3B3B');
+  let mode;
+  if(theme.length === 0) {
+    mode = false;
+    localStorage.setItem('theme',JSON.stringify([{dark: mode}]));
   }else {
-    root.style.setProperty('--primary-color', 'white');
-    root.style.setProperty('--secondary-color', '#1E1E1E');
-    root.style.setProperty('--text-color', 'black');
-    root.style.setProperty('--task-color', 'white');
-    root.style.setProperty('--footer-color', '#1E1E1E');
-    root.style.setProperty('--theme-btn', 'url()');
-    root.style.setProperty('--container-bg', 'url()');
-    root.style.setProperty('--complete-icon', 'url()');
-    root.style.setProperty('--filter', 'none');
-    root.style.setProperty('--theme-transition', '0s');
-    root.style.setProperty('--scrollbar-color', '#dbdbdb');
-    root.style.setProperty('--scrollbar-thumb-color', '#bdbdbd');
-  }
+    if (theme[0].dark === true) {
+      root.style.setProperty('--primary-color', '#1E1E1E');
+      root.style.setProperty('--secondary-color', '#3B3B3B');
+      root.style.setProperty('--text-color', '#EAEAEA');
+      root.style.setProperty('--task-color', '#3B3B3B');
+      root.style.setProperty('--footer-color', '#1E1E1E');
+      root.style.setProperty('--theme-btn', 'url(./assets/img/light-mode.svg)');
+      root.style.setProperty('--container-bg', 'black');
+      root.style.setProperty('--container-bg-img', 'url(./assets/img/clip-dark.svg)');
+      root.style.setProperty('--filter', 'invert()');
+      root.style.setProperty('--theme-transition', '0s');
+      root.style.setProperty('--scrollbar-color', '#1E1E1E');
+      root.style.setProperty('--scrollbar-thumb-color', '#3B3B3B');
+    }else {
+      root.style.setProperty('--primary-color', 'white');
+      root.style.setProperty('--secondary-color', '#1E1E1E');
+      root.style.setProperty('--text-color', 'black');
+      root.style.setProperty('--task-color', 'white');
+      root.style.setProperty('--footer-color', '#1E1E1E');
+      root.style.setProperty('--theme-btn', 'url(./assets/img/dark-mode.svg)');
+      root.style.setProperty('--container-bg-img', 'url(./assets/img/clip-light.svg)');
+      root.style.setProperty('--container-bg', 'white');
+      root.style.setProperty('--filter', 'none');
+      root.style.setProperty('--theme-transition', '0s');
+      root.style.setProperty('--scrollbar-color', '#dbdbdb');
+      root.style.setProperty('--scrollbar-thumb-color', '#bdbdbd');
+    }
+}
 
   //get Todo list from localStorage
   let todo = Array.from(JSON.parse(localStorage.getItem("tasks") || "[]"));
   //check if array is empty and place a bg image
   if(todo.length === 0) {
-    container.classList.add('empty-todo');
+    todoList.classList.add('empty-todo-list');
   }else{
     //loop through array and list them in ul
     todo.forEach(task => {
@@ -123,6 +128,12 @@ function addItem(e) {
       li.innerHTML = "<input type='checkbox' class='check'><span>"+text+"</span><button style='float:right;' type='button' class='delete'>X</button>";
       todoList.insertBefore(li, todoList.children[0]);
 
+      //remove background image
+      let items = Array.from(todoList.getElementsByTagName('li'));
+      if(items.length > 0) {
+        todoList.classList.remove('empty-todo-list');
+      }
+
       //reset input
       newTodo.value = "";
     }
@@ -169,6 +180,13 @@ function removeItem(e) {
     //remove element from displayed list
     let li = e.target.parentElement;
     todoList.removeChild(li);
+
+    //bring back background image
+    let items = Array.from(todoList.getElementsByTagName('li'));
+    if(items.length === 0) {
+      todoList.classList.add('empty-todo-list');
+    }
+
   }
 }
 
@@ -205,7 +223,8 @@ function themeChange(e) {
       root.style.setProperty('--text-color', '#EAEAEA');
       root.style.setProperty('--task-color', '#3B3B3B');
       root.style.setProperty('--footer-color', '#1E1E1E');
-      root.style.setProperty('--theme-btn', '');
+      root.style.setProperty('--theme-btn', 'url(./assets/img/light-mode.svg)');
+      root.style.setProperty('--container-bg-img', 'url(./assets/img/clip-dark.svg)');
       root.style.setProperty('--container-bg', 'black');
       root.style.setProperty('--filter', 'invert()');
       root.style.setProperty('--theme-transition', '1s');
@@ -217,9 +236,9 @@ function themeChange(e) {
       root.style.setProperty('--text-color', 'black');
       root.style.setProperty('--task-color', 'white');
       root.style.setProperty('--footer-color', '#1E1E1E');
-      root.style.setProperty('--theme-btn', 'url()');
-      root.style.setProperty('--container-bg', 'url()');
-      root.style.setProperty('--complete-icon', 'url()');
+      root.style.setProperty('--theme-btn', 'url(./assets/img/dark-mode.svg)');
+      root.style.setProperty('--container-bg-img', 'url(./assets/img/clip-light.svg)');
+      root.style.setProperty('--container-bg', 'white');
       root.style.setProperty('--filter', 'none');
       root.style.setProperty('--theme-transition', '1s');
       root.style.setProperty('--scrollbar-color', '#dbdbdb');
